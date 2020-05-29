@@ -1,3 +1,9 @@
+## Sample (4 preloaded color schemes):
+<img src="https://github.com/ashutoshkumar19/resume-builder/blob/master/samples/dummy-seagreen.jpg" width="200px" /> 
+<img src="https://github.com/ashutoshkumar19/resume-builder/blob/master/samples/dummy-blue.jpg" width="200px" /> 
+<img src="https://github.com/ashutoshkumar19/resume-builder/blob/master/samples/dummy-grey.jpg" width="200px" /> 
+<img src="https://github.com/ashutoshkumar19/resume-builder/blob/master/samples/dummy-indigo.jpg" width="200px" /> 
+
 ## Steps to run this project:
 
 In the project directory,
@@ -7,7 +13,7 @@ In the project directory,
 * Runs the app in the development mode.
 * Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## To selecet color-schems:
+## To select color-schems:
 
 In `/src/styles/App.scss/` choose your desired color-*.scss file by uncommenting it commenting rest of the color schemes.
 
