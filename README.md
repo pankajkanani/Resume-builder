@@ -13,7 +13,7 @@ In the project directory,
 
 ## To select color-schems:
 
-In `/src/styles/App.scss/` choose your desired color-*.scss file by uncommenting it commenting rest of the color schemes.
+In `/src/styles/App.scss/` choose your desired color-*.scss file by uncommenting it, comment-out rest of the color schemes.
 
 ## To add more color schemes:
 
@@ -30,9 +30,9 @@ In `/src/data.json/` , edit the values corresponding to predefined keys.
 To add your photo, you have two options: 
 * Simply copy and paste your photo inside `/src/images/` directory and rename it to `photo.jpg`.
 
-* Put the url of your online photo into `data.json` file as follows:  `"contact": {"photourl": "https://anysite/myphoto.jpg"}`
+* Put the url of your online photo into `data.json` file as follows:  `"contact": {"photoUrl": "https://anysite/myphoto.jpg"}`
 
-* Note: If both `photo.jpg` is in `/src/images/` directory and `photoUrl` is also specified in `data.json`, then `photoUrl` will get preference and it will be shown.
+* Note: If both `photo.jpg` in `/src/images/` directory and `photoUrl` in `data.json` are specified, then `photoUrl` will get preference and it will be shown.
 
 ## To save/download the resume:
 
