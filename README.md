@@ -5,7 +5,7 @@
 
 ## See this project live:
 
-`https://createmyresume.netlify.app`
+`[https://createmyresume.netlify.app](https://createmyresume.netlify.app)`
 
 ## Steps to run this project:
 
