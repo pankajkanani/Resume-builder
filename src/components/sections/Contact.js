@@ -18,7 +18,7 @@ const Contact = ({ data }) => {
   return (
     <Fragment>
       <div className='photo-container'>
-        <img src={photoUrl.trim().length !== 0 ? photoUrl : Photo ? Photo : Default} alt={name} />
+        <img src={photoUrl.trim().length !== 0 ? photoUrl : Photo ? Photo : Default} alt='' />
       </div>
       {name && <div className='name'>{name}</div>}
       <div className='contact'>
