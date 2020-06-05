@@ -2,7 +2,7 @@ import React from 'react';
 
 const Projects = ({ data }) => {
   const projects = data.projects;
-  const projects_link = data.more_projects_link;
+  const projects_link = data.projects_link;
   return (
     <div className='projects'>
       <p className='heading'>

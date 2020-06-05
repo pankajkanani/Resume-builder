@@ -18,11 +18,18 @@ const Education = ({ data }) => {
                 {item.year}
               </p>
             )}
-            <p className='score'>
-              {item.percentage
+            {/* <p className='score'>
+              {item.percentage 
                 ? `Percentage: ${item.percentage}`
                 : item.cgpa && `CGPA: ${item.cgpa}`}
-            </p>
+            </p> */}
+            {item.percentage.length > 0 && (
+              <p className='score'>
+                {item.percentage <= 10
+                  ? `CGPA: ${item.percentage}`
+                  : `Percentage: ${item.percentage}`}
+              </p>
+            )}
           </div>
           <div className='right-column'>
             <p className='course'>{item.course}</p>

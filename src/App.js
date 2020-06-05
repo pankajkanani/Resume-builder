@@ -1,18 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, Fragment } from 'react';
+import { useReactToPrint } from 'react-to-print';
 import './styles/App.scss';
-import LeftContent from './LeftContent';
-import RightContent from './RightContent';
-import data from './data.json';
+import Form from './components/Form';
+import Resume from './components/Resume';
 
-function App() {
+import jsonData from './data.json';
+
+const App = () => {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    setData(jsonData);
+  }, []);
+
+  const componentRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
   return (
     <div className='mainContent'>
-      <div className='row'>
-        <LeftContent data={data} />
-        <RightContent data={data} />
-      </div>
+      {data !== undefined && (
+        <Fragment>
+          <div className='left'>
+            <Form data={data} setData={setData} />
+          </div>
+
+          <div className='right'>
+            <Resume ref={componentRef} data={data} />
+          </div>
+
+          <button className='printBtn' onClick={handlePrint}>
+            Download / Print
+          </button>
+        </Fragment>
+      )}
     </div>
   );
-}
+};
 
 export default App;

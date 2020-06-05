@@ -1,10 +1,10 @@
 import React from 'react';
-import Objective from './components/Objective';
-import Education from './components/Education';
-import Experience from './components/Experience';
-import Certifications from './components/Certifications';
-import Projects from './components/Projects';
-import Workshops from './components/Workshops';
+import Objective from './sections/Objective';
+import Education from './sections/Education';
+import Experience from './sections/Experience';
+import Certifications from './sections/Certifications';
+import Projects from './sections/Projects';
+import Workshops from './sections/Workshops';
 
 const RightContent = ({ data }) => {
   const check = (item) => {

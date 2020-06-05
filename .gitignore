@@ -2,6 +2,7 @@
 
 /src/images/photo.jpg
 /src/data_backup.json
+/src/data-backup.json
 
 # dependencies
 /node_modules

@@ -12,11 +12,15 @@ const Skills = ({ data }) => {
       <hr />
       <div className='skills-container'>
         {skills.map((item, index) => {
-          return (
-            <div key={index} className='item'>
-              {item}
-            </div>
-          );
+          if (item.trim().length > 0) {
+            return (
+              <div key={index} className='item'>
+                {item}
+              </div>
+            );
+          } else {
+            return false;
+          }
         })}
       </div>
     </div>

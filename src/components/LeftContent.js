@@ -1,8 +1,8 @@
 import React from 'react';
-import Contact from './components/Contact';
-import Skills from './components/Skills';
-import Languages from './components/Languages';
-import References from './components/References';
+import Contact from './sections/Contact';
+import Skills from './sections/Skills';
+import Languages from './sections/Languages';
+import References from './sections/References';
 
 const LeftContent = ({ data }) => {
   const check = (item) => {

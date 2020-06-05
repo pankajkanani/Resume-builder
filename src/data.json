@@ -23,15 +23,15 @@
       "year": "May 2014",
       "course": "12th (PCM + CS)",
       "institution": "Random Public School, New Delhi, Delhi",
-      "board": "CBSE",
+      "university": "CBSE",
       "percentage": "92.5"
     },
     {
       "year": "May 2012",
       "course": "10th",
       "institution": "Random Public School, New Delhi, Delhi",
-      "board": "CBSE",
-      "cgpa": "10"
+      "university": "CBSE",
+      "percentage": "10"
     }
   ],
 
@@ -107,7 +107,7 @@
     }
   ],
 
-  "more_projects_link": "https://some-more-projects.github.com",
+  "projects_link": "https://some-more-projects.github.com",
 
   "workshops": [
     {
@@ -116,7 +116,7 @@
     },
     {
       "year": "Nov 2018",
-      "description": " If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."
+      "description": "If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."
     }
   ],
 

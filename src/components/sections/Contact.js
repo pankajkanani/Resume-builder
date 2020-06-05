@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import Default from '../images/default.jpg';
+import Default from '../../images/default.jpg';
 
 const Contact = ({ data }) => {
   const { name, photoUrl, location, phone, email, linkedin, github } = data.contact;
@@ -8,7 +8,7 @@ const Contact = ({ data }) => {
 
   useEffect(() => {
     try {
-      const temp = require('../images/photo.jpg');
+      const temp = require('../../images/photo.jpg');
       setPhoto(temp);
     } catch (error) {
       console.log(error);
@@ -18,10 +18,7 @@ const Contact = ({ data }) => {
   return (
     <Fragment>
       <div className='photo-container'>
-        <img
-          src={photoUrl.trim().length !== 0 ? photoUrl : Photo ? Photo : Default}
-          alt={name}
-        />
+        <img src={photoUrl.trim().length !== 0 ? photoUrl : Photo ? Photo : Default} alt={name} />
       </div>
       {name && <div className='name'>{name}</div>}
       <div className='contact'>
@@ -53,11 +50,7 @@ const Contact = ({ data }) => {
           <div className='item'>
             <i className='fab fa-linkedin icon'></i>
             <p className='text'>
-              <a
-                href={'https://www.' + linkedin}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
+              <a href={'https://www.' + linkedin} target='_blank' rel='noopener noreferrer'>
                 {linkedin}
               </a>
             </p>
