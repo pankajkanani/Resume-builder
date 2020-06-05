@@ -34,9 +34,7 @@ const Education = ({ data }) => {
           <div className='right-column'>
             <p className='course'>{item.course}</p>
             <p className='institution'>{item.institution}</p>
-            <p className='university'>
-              {item.university ? item.university : item.board && item.board}
-            </p>
+            <p className='university'>{item.university}</p>
           </div>
         </div>
       ))}

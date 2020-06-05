@@ -11,7 +11,7 @@ const References = ({ data }) => {
       <hr />
       {references.map((item, index) => (
         <div key={index} className='reference-item'>
-          {item.desig && (
+          {item.name && (
             <div className='item'>
               <p className='text rname'>{item.name}</p>
             </div>

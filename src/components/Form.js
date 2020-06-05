@@ -1,19 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import Files from 'react-files';
+
 import '../styles/Form.scss';
 
 const Form = ({ data, setData }) => {
-  const { name, photoUrl, location, phone, email, linkedin, github } = data.contact;
-  // const skills = data.skills;
-  const languages = data.languages;
-  const references = data.references;
-  const objective = data.objective;
-  const education = data.education;
-  const experience = data.experience;
-  const certifications = data.certifications;
-  const projects = data.projects;
-  const projects_link = data.projects_link;
-  const workshops = data.workshops;
+  let { name, photoUrl, location, phone, email, linkedin, github } = data.contact;
+  let languages = data.languages;
+  let references = data.references;
+  let objective = data.objective;
+  let education = data.education;
+  let experience = data.experience;
+  let certifications = data.certifications;
+  let projects = data.projects;
+  let projects_link = data.projects_link;
+  let workshops = data.workshops;
+
+  const handleFileUpload = (files) => {
+    var fileReader = new FileReader();
+    fileReader.onload = (event) => {
+      const temp = JSON.parse(event.target.result);
+      console.log(temp);
+      setData(temp);
+      event.target.value = null;
+    };
+    fileReader.readAsText(files[files.length - 1]);
+  };
 
   const [skills, setSkills] = useState('');
   useEffect(() => {
@@ -22,15 +33,6 @@ const Form = ({ data, setData }) => {
     temp = temp.slice(0, -1);
     setSkills(temp);
   }, [data]);
-
-  const handleFileUpload = (file) => {
-    var fileReader = new FileReader();
-    fileReader.onload = (event) => {
-      setData();
-      setData(JSON.parse(event.target.result));
-    };
-    fileReader.readAsText(file[0]);
-  };
 
   // Contact
   const handleContactChange = (e) => {
@@ -52,248 +54,45 @@ const Form = ({ data, setData }) => {
     });
   };
 
-  // Languages
-  const addLanguageRow = (e) => {
-    let temp = languages;
-    temp.push({});
+  // Add Row
+  const addRow = (section, structure) => {
+    let temp = section;
+    temp.push(structure);
     setData({
       ...data,
-      languages: temp,
+      section: temp,
     });
   };
-  const removeLanguageRow = (e, index) => {
-    let temp = languages;
+
+  // Remove Row
+  const removeRow = (section, index) => {
+    let temp = section;
     temp[index] = {};
     temp.splice(index, 1);
     setData({
       ...data,
-      languages: temp,
+      section: temp,
     });
   };
-  const handleLanguageChange = (e, index, type) => {
-    let temp = languages;
-    if (type === 'language') {
-      temp[index].language = e.target.value;
-    } else if (type === 'level') {
+
+  // Handle Change
+  const handleChange = (e, index, section, type) => {
+    let temp = section;
+    temp[index][type] = e.target.value;
+
+    if (section === languages && type === 'level') {
       if (e.target.value > 5) {
-        temp[index].level = 5;
+        temp[index][type] = 5;
       } else if (e.target.value < 1) {
-        temp[index].level = 1;
+        temp[index][type] = 1;
       } else {
-        temp[index].level = e.target.value;
+        temp[index][type] = e.target.value;
       }
     }
-    setData({
-      ...data,
-      languages: temp,
-    });
-  };
 
-  // References
-  const addReferenceRow = (e) => {
-    let temp = references;
-    temp.push({});
     setData({
       ...data,
-      references: temp,
-    });
-  };
-  const removeReferenceRow = (e, index) => {
-    let temp = references;
-    temp[index] = {};
-    temp.splice(index, 1);
-    setData({
-      ...data,
-      references: temp,
-    });
-  };
-  const handleReferenceChange = (e, index, type) => {
-    let temp = references;
-    if (type === 'name') {
-      temp[index].name = e.target.value;
-    } else if (type === 'desig') {
-      temp[index].desig = e.target.value;
-    } else if (type === 'phone') {
-      temp[index].phone = e.target.value;
-    } else if (type === 'email') {
-      temp[index].email = e.target.value;
-    }
-    setData({
-      ...data,
-      referencess: temp,
-    });
-  };
-
-  // Education
-  const addEducationRow = (e) => {
-    let temp = education;
-    temp.push({ year: '', course: '', institution: '', university: '', percentage: '' });
-    setData({
-      ...data,
-      education: temp,
-    });
-  };
-  const removeEducationRow = (e, index) => {
-    let temp = education;
-    temp[index] = {};
-    temp.splice(index, 1);
-    setData({
-      ...data,
-      education: temp,
-    });
-  };
-  const handleEducationChange = (e, index, type) => {
-    let temp = education;
-    if (type === 'year') {
-      temp[index].year = e.target.value;
-    } else if (type === 'course') {
-      temp[index].course = e.target.value;
-    } else if (type === 'institution') {
-      temp[index].institution = e.target.value;
-    } else if (type === 'university') {
-      temp[index].university = e.target.value;
-    } else if (type === 'percentage') {
-      temp[index].percentage = e.target.value;
-    }
-    setData({
-      ...data,
-      education: temp,
-    });
-  };
-
-  // Experience
-  const addExperienceRow = (e) => {
-    let temp = experience;
-    temp.push({ year: '', company: '', position: '', description: '' });
-    setData({
-      ...data,
-      experience: temp,
-    });
-  };
-  const removeExperienceRow = (e, index) => {
-    let temp = experience;
-    temp[index] = {};
-    temp.splice(index, 1);
-    setData({
-      ...data,
-      experience: temp,
-    });
-  };
-  const handleExperienceChange = (e, index, type) => {
-    let temp = experience;
-    if (type === 'year') {
-      temp[index].year = e.target.value;
-    } else if (type === 'company') {
-      temp[index].company = e.target.value;
-    } else if (type === 'position') {
-      temp[index].position = e.target.value;
-    } else if (type === 'description') {
-      temp[index].description = e.target.value;
-    }
-    setData({
-      ...data,
-      experience: temp,
-    });
-  };
-
-  // Certifications
-  const addCertificationRow = (e) => {
-    let temp = certifications;
-    temp.push({ year: '', institution: '', course: '', description: '' });
-    setData({
-      ...data,
-      certifications: temp,
-    });
-  };
-  const removeCertificationRow = (e, index) => {
-    let temp = certifications;
-    temp[index] = {};
-    temp.splice(index, 1);
-    setData({
-      ...data,
-      certifications: temp,
-    });
-  };
-  const handleCertificationChange = (e, index, type) => {
-    let temp = certifications;
-    if (type === 'year') {
-      temp[index].year = e.target.value;
-    } else if (type === 'institution') {
-      temp[index].institution = e.target.value;
-    } else if (type === 'course') {
-      temp[index].course = e.target.value;
-    } else if (type === 'description') {
-      temp[index].description = e.target.value;
-    } else if (type === 'score') {
-      temp[index].score = e.target.value;
-    }
-    setData({
-      ...data,
-      certifications: temp,
-    });
-  };
-
-  // Projects
-  const addProjectRow = (e) => {
-    let temp = projects;
-    temp.push({ title: '', link: '', description: '' });
-    setData({
-      ...data,
-      projects: temp,
-    });
-  };
-  const removeProjectRow = (e, index) => {
-    let temp = projects;
-    temp[index] = {};
-    temp.splice(index, 1);
-    setData({
-      ...data,
-      projects: temp,
-    });
-  };
-  const handleProjectChange = (e, index, type) => {
-    let temp = projects;
-    if (type === 'title') {
-      temp[index].title = e.target.value;
-    } else if (type === 'link') {
-      temp[index].link = e.target.value;
-    } else if (type === 'description') {
-      temp[index].description = e.target.value;
-    }
-    setData({
-      ...data,
-      projects: temp,
-    });
-  };
-
-  // Workshops
-  const addWorkshopRow = (e) => {
-    let temp = workshops;
-    temp.push({ year: '', description: '' });
-    setData({
-      ...data,
-      workshops: temp,
-    });
-  };
-  const removeWorkshopRow = (e, index) => {
-    let temp = workshops;
-    temp[index] = {};
-    temp.splice(index, 1);
-    setData({
-      ...data,
-      workshops: temp,
-    });
-  };
-  const handleWorkshopChange = (e, index, type) => {
-    let temp = workshops;
-    if (type === 'year') {
-      temp[index].year = e.target.value;
-    } else if (type === 'description') {
-      temp[index].description = e.target.value;
-    }
-    setData({
-      ...data,
-      workshops: temp,
+      section: temp,
     });
   };
 
@@ -301,18 +100,17 @@ const Form = ({ data, setData }) => {
     <div className='form-container'>
       <Files
         className='files-dropzone'
-        onChange={(file) => handleFileUpload(file)}
+        onChange={(files) => handleFileUpload(files)}
         onError={(err) => console.log(err)}
         accepts={['.json']}
         multiple
-        maxFiles={1}
+        maxFiles={100}
         maxFileSize={10000000}
         minFileSize={0}
         clickable
       >
         Upload JSON File
       </Files>
-
       <div className='form'>
         <div className='section contact'>
           <hr />
@@ -352,58 +150,54 @@ const Form = ({ data, setData }) => {
 
         <div className='section languages'>
           <hr />
-          <div style={{ display: 'flex' }}>
-            <h3 className='heading'>Languages</h3>
-            <button className='btn btn-sm btn-dark' onClick={addLanguageRow}>
-              Add
-            </button>
-          </div>
+          <h3 className='heading'>Languages</h3>
           {languages.map((item, index) => {
             return (
-              <div className='row'>
+              <div className='row' key={index}>
                 <input
                   type='text'
                   name='language'
                   placeholder='Language'
                   value={item.language}
-                  onChange={(e) => handleLanguageChange(e, index, 'language')}
+                  onChange={(e) => handleChange(e, index, languages, 'language')}
                 />
                 <input
                   type='number'
                   name='level'
                   placeholder='Level'
                   value={item.level}
-                  onChange={(e) => handleLanguageChange(e, index, 'level')}
+                  onChange={(e) => handleChange(e, index, languages, 'level')}
                 />
                 <button
                   className='btn btn-sm btn-danger'
-                  onClick={(e) => removeLanguageRow(e, index)}
+                  onClick={() => removeRow(languages, index)}
                 >
                   Remove
                 </button>
               </div>
             );
           })}
+          <button
+            className='btn btn-sm btn-dark'
+            onClick={() => addRow(languages, { language: '', level: '' })}
+          >
+            Add
+          </button>
         </div>
 
         <div className='section references'>
           <hr />
-          <div style={{ display: 'flex' }}>
-            <h3 className='heading'>References</h3>
-            <button className='btn btn-sm btn-dark' onClick={addReferenceRow}>
-              Add
-            </button>
-          </div>
+          <h3 className='heading'>References</h3>
           {references.map((item, index) => {
             return (
-              <div className='row'>
+              <div className='row' key={index}>
                 <div className='item'>
                   <input
                     type='text'
                     name='name'
                     placeholder='Name'
                     value={item.name}
-                    onChange={(e) => handleReferenceChange(e, index, 'name')}
+                    onChange={(e) => handleChange(e, index, references, 'name')}
                   />
                   <textarea
                     name='desig'
@@ -411,33 +205,38 @@ const Form = ({ data, setData }) => {
                     rows='3'
                     placeholder='Designation'
                     value={item.desig}
-                    onChange={(e) => handleReferenceChange(e, index, 'desig')}
+                    onChange={(e) => handleChange(e, index, references, 'desig')}
                   />
                   <input
                     type='text'
                     name='phone'
                     placeholder='Phone number'
                     value={item.phone}
-                    onChange={(e) => handleReferenceChange(e, index, 'phone')}
+                    onChange={(e) => handleChange(e, index, references, 'phone')}
                   />
                   <input
                     type='email'
                     name='email'
                     placeholder='Email'
                     value={item.email}
-                    onChange={(e) => handleReferenceChange(e, index, 'email')}
+                    onChange={(e) => handleChange(e, index, references, 'email')}
                   />
                 </div>
-
                 <button
                   className='btn btn-sm btn-danger'
-                  onClick={(e) => removeReferenceRow(e, index)}
+                  onClick={() => removeRow(references, index)}
                 >
                   Remove
                 </button>
               </div>
             );
           })}
+          <button
+            className='btn btn-sm btn-dark'
+            onClick={() => addRow(references, { name: '', desig: '', phone: '', email: '' })}
+          >
+            Add
+          </button>
         </div>
 
         <div className='section objective'>
@@ -454,96 +253,100 @@ const Form = ({ data, setData }) => {
 
         <div className='section education'>
           <hr />
-          <div style={{ display: 'flex' }}>
-            <h3 className='heading'>Education</h3>
-            <button className='btn btn-sm btn-dark' onClick={addEducationRow}>
-              Add
-            </button>
-          </div>
+          <h3 className='heading'>Education</h3>
           {education.map((item, index) => {
             return (
-              <div className='row'>
+              <div className='row' key={index}>
                 <div className='item'>
                   <input
                     type='text'
                     name='year'
                     placeholder='Year'
                     value={item.year}
-                    onChange={(e) => handleEducationChange(e, index, 'year')}
+                    onChange={(e) => handleChange(e, index, education, 'year')}
                   />
                   <input
                     type='text'
                     name='course'
                     placeholder='Course/Degree'
                     value={item.course}
-                    onChange={(e) => handleEducationChange(e, index, 'course')}
+                    onChange={(e) => handleChange(e, index, education, 'course')}
                   />
                   <input
                     type='text'
                     name='institution'
                     placeholder='School/College'
                     value={item.institution}
-                    onChange={(e) => handleEducationChange(e, index, 'institution')}
+                    onChange={(e) => handleChange(e, index, education, 'institution')}
                   />
                   <input
                     type='text'
                     name='university'
                     placeholder='Board/University'
                     value={item.university}
-                    onChange={(e) => handleEducationChange(e, index, 'university')}
+                    onChange={(e) => handleChange(e, index, education, 'university')}
                   />
                   <input
                     type='number'
                     name='percentage'
                     placeholder='Percentage/GPA'
                     value={item.percentage}
-                    onChange={(e) => handleEducationChange(e, index, 'percentage')}
+                    onChange={(e) => handleChange(e, index, education, 'percentage')}
                   />
                 </div>
 
                 <button
                   className='btn btn-sm btn-danger'
-                  onClick={(e) => removeEducationRow(e, index)}
+                  onClick={() => removeRow(education, index)}
                 >
                   Remove
                 </button>
               </div>
             );
           })}
+          <button
+            className='btn btn-sm btn-dark'
+            onClick={() =>
+              addRow(education, {
+                year: '',
+                course: '',
+                institution: '',
+                university: '',
+                percentage: '',
+              })
+            }
+          >
+            Add
+          </button>
         </div>
 
         <div className='section experience'>
           <hr />
-          <div style={{ display: 'flex' }}>
-            <h3 className='heading'>Experience</h3>
-            <button className='btn btn-sm btn-dark' onClick={addExperienceRow}>
-              Add
-            </button>
-          </div>
+          <h3 className='heading'>Experience</h3>
           {experience.map((item, index) => {
             return (
-              <div className='row'>
+              <div className='row' key={index}>
                 <div className='item'>
                   <input
                     type='text'
                     name='year'
                     placeholder='Year'
                     value={item.year}
-                    onChange={(e) => handleExperienceChange(e, index, 'year')}
+                    onChange={(e) => handleChange(e, index, experience, 'year')}
                   />
                   <input
                     type='text'
                     name='position'
                     placeholder='Role/Position'
                     value={item.position}
-                    onChange={(e) => handleExperienceChange(e, index, 'position')}
+                    onChange={(e) => handleChange(e, index, experience, 'position')}
                   />
                   <input
                     type='text'
                     name='company'
                     placeholder='Company'
                     value={item.company}
-                    onChange={(e) => handleExperienceChange(e, index, 'company')}
+                    onChange={(e) => handleChange(e, index, experience, 'company')}
                   />
                   <textarea
                     name='description'
@@ -551,60 +354,63 @@ const Form = ({ data, setData }) => {
                     rows='5'
                     placeholder='Description'
                     value={item.description}
-                    onChange={(e) => handleExperienceChange(e, index, 'description')}
+                    onChange={(e) => handleChange(e, index, experience, 'description')}
                   />
                 </div>
 
                 <button
                   className='btn btn-sm btn-danger'
-                  onClick={(e) => removeExperienceRow(e, index)}
+                  onClick={() => removeRow(experience, index)}
                 >
                   Remove
                 </button>
               </div>
             );
           })}
+          <button
+            className='btn btn-sm btn-dark'
+            onClick={() =>
+              addRow(experience, { year: '', company: '', position: '', description: '' })
+            }
+          >
+            Add
+          </button>
         </div>
 
         <div className='section certifications'>
           <hr />
-          <div style={{ display: 'flex' }}>
-            <h3 className='heading'>Certifications</h3>
-            <button className='btn btn-sm btn-dark' onClick={addCertificationRow}>
-              Add
-            </button>
-          </div>
+          <h3 className='heading'>Certifications</h3>
           {certifications.map((item, index) => {
             return (
-              <div className='row'>
+              <div className='row' key={index}>
                 <div className='item'>
                   <input
                     type='text'
                     name='year'
                     placeholder='Year'
                     value={item.year}
-                    onChange={(e) => handleCertificationChange(e, index, 'year')}
+                    onChange={(e) => handleChange(e, index, certifications, 'year')}
                   />
                   <input
                     type='text'
                     name='course'
                     placeholder='Course'
                     value={item.course}
-                    onChange={(e) => handleCertificationChange(e, index, 'course')}
+                    onChange={(e) => handleChange(e, index, certifications, 'course')}
                   />
                   <input
                     type='text'
                     name='institution'
                     placeholder='Institution'
                     value={item.institution}
-                    onChange={(e) => handleCertificationChange(e, index, 'institution')}
+                    onChange={(e) => handleChange(e, index, certifications, 'institution')}
                   />
                   <input
                     type='text'
                     name='score'
                     placeholder='Score'
                     value={item.score}
-                    onChange={(e) => handleCertificationChange(e, index, 'score')}
+                    onChange={(e) => handleChange(e, index, certifications, 'score')}
                   />
                   <textarea
                     name='description'
@@ -612,46 +418,49 @@ const Form = ({ data, setData }) => {
                     rows='5'
                     placeholder='Description'
                     value={item.description}
-                    onChange={(e) => handleCertificationChange(e, index, 'description')}
+                    onChange={(e) => handleChange(e, index, certifications, 'description')}
                   />
                 </div>
 
                 <button
                   className='btn btn-sm btn-danger'
-                  onClick={(e) => removeCertificationRow(e, index)}
+                  onClick={(e) => removeRow(certifications, index)}
                 >
                   Remove
                 </button>
               </div>
             );
           })}
+          <button
+            className='btn btn-sm btn-dark'
+            onClick={() =>
+              addRow(certifications, { year: '', institution: '', course: '', description: '' })
+            }
+          >
+            Add
+          </button>
         </div>
 
         <div className='section projects'>
           <hr />
-          <div style={{ display: 'flex' }}>
-            <h3 className='heading'>Projects</h3>
-            <button className='btn btn-sm btn-dark' onClick={addProjectRow}>
-              Add
-            </button>
-          </div>
+          <h3 className='heading'>Projects</h3>
           {projects.map((item, index) => {
             return (
-              <div className='row'>
+              <div className='row' key={index}>
                 <div className='item'>
                   <input
                     type='text'
                     name='title'
                     placeholder='Title'
                     value={item.title}
-                    onChange={(e) => handleProjectChange(e, index, 'title')}
+                    onChange={(e) => handleChange(e, index, projects, 'title')}
                   />
                   <input
                     type='text'
                     name='link'
                     placeholder='Project URL'
                     value={item.link}
-                    onChange={(e) => handleProjectChange(e, index, 'link')}
+                    onChange={(e) => handleChange(e, index, projects, 'link')}
                   />
                   <textarea
                     name='description'
@@ -659,18 +468,24 @@ const Form = ({ data, setData }) => {
                     rows='5'
                     placeholder='Description'
                     value={item.description}
-                    onChange={(e) => handleProjectChange(e, index, 'description')}
+                    onChange={(e) => handleChange(e, index, projects, 'description')}
                   />
                 </div>
                 <button
                   className='btn btn-sm btn-danger'
-                  onClick={(e) => removeProjectRow(e, index)}
+                  onClick={() => removeRow(projects, index)}
                 >
                   Remove
                 </button>
               </div>
             );
           })}
+          <button
+            className='btn btn-sm btn-dark'
+            onClick={() => addRow(projects, { title: '', link: '', description: '' })}
+          >
+            Add
+          </button>
           <input
             type='text'
             name='projects_link'
@@ -682,22 +497,17 @@ const Form = ({ data, setData }) => {
 
         <div className='section workshops'>
           <hr />
-          <div style={{ display: 'flex' }}>
-            <h3 className='heading'>Workshops</h3>
-            <button className='btn btn-sm btn-dark' onClick={addWorkshopRow}>
-              Add
-            </button>
-          </div>
+          <h3 className='heading'>Workshops</h3>
           {workshops.map((item, index) => {
             return (
-              <div className='row'>
+              <div className='row' key={index}>
                 <div className='item'>
                   <input
                     type='text'
                     name='year'
                     placeholder='Year'
                     value={item.year}
-                    onChange={(e) => handleWorkshopChange(e, index, 'year')}
+                    onChange={(e) => handleChange(e, index, workshops, 'year')}
                   />
                   <textarea
                     name='description'
@@ -705,19 +515,25 @@ const Form = ({ data, setData }) => {
                     rows='5'
                     placeholder='Description'
                     value={item.description}
-                    onChange={(e) => handleWorkshopChange(e, index, 'description')}
+                    onChange={(e) => handleChange(e, index, workshops, 'description')}
                   />
                 </div>
 
                 <button
                   className='btn btn-sm btn-danger'
-                  onClick={(e) => removeWorkshopRow(e, index)}
+                  onClick={() => removeRow(workshops, index)}
                 >
                   Remove
                 </button>
               </div>
             );
           })}
+          <button
+            className='btn btn-sm btn-dark'
+            onClick={() => addRow(workshops, { year: '', description: '' })}
+          >
+            Add
+          </button>
         </div>
       </div>
     </div>

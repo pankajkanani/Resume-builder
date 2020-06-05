@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, Fragment } from 'react';
 import { useReactToPrint } from 'react-to-print';
+
 import './styles/App.scss';
 import Form from './components/Form';
 import Resume from './components/Resume';
