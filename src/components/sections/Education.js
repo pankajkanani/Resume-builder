@@ -8,7 +8,7 @@ const Education = ({ data }) => {
         <span className='material-icons'>school</span>
         Education
       </p>
-      <hr />
+      <hr style={{ color: 'red' }} />
       {education.map((item, index) => (
         <div key={index} className='row-table'>
           <div className='left-column'>

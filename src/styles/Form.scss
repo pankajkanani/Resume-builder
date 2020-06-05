@@ -4,11 +4,14 @@
   width: 100%;
   padding: 10px;
 
-  .files-dropzone {
+  .file-btn {
     width: fit-content;
     padding: 6px 8px;
-    margin-bottom: 15px;
+    margin: 0 15px 15px 0;
     border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    outline: none;
     background-color: rgb(0, 142, 207);
     color: #fff;
     cursor: pointer;

@@ -15,6 +15,7 @@ const Form = ({ data, setData }) => {
   let projects_link = data.projects_link;
   let workshops = data.workshops;
 
+  // Handle JSON file upload
   const handleFileUpload = (files) => {
     var fileReader = new FileReader();
     fileReader.onload = (event) => {
@@ -24,6 +25,31 @@ const Form = ({ data, setData }) => {
       event.target.value = null;
     };
     fileReader.readAsText(files[files.length - 1]);
+  };
+
+  // Handle JSON file download
+  const handleFileDownload = async () => {
+    const fileName = 'resume';
+    const json = JSON.stringify(data, undefined, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const href = await URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = href;
+    link.download = fileName + '.json';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Handle photo upload
+  const handlePhotoUpload = (files) => {
+    setData({
+      ...data,
+      contact: {
+        ...data.contact,
+        photoUrl: URL.createObjectURL(files[files.length - 1]),
+      },
+    });
   };
 
   const [skills, setSkills] = useState('');
@@ -98,19 +124,48 @@ const Form = ({ data, setData }) => {
 
   return (
     <div className='form-container'>
-      <Files
-        className='files-dropzone'
-        onChange={(files) => handleFileUpload(files)}
-        onError={(err) => console.log(err)}
-        accepts={['.json']}
-        multiple
-        maxFiles={100}
-        maxFileSize={10000000}
-        minFileSize={0}
-        clickable
-      >
-        Upload JSON File
-      </Files>
+      <div style={{ display: 'flex' }}>
+        <div title='Populate resume data from JSON file'>
+          <Files
+            className='files-dropzone file-btn'
+            onChange={(files) => handleFileUpload(files)}
+            onError={(err) => console.log(err)}
+            accepts={['.json']}
+            multiple
+            maxFiles={100}
+            maxFileSize={10000000}
+            minFileSize={0}
+            clickable
+          >
+            Upload JSON
+          </Files>
+        </div>
+
+        <button
+          className='file-btn'
+          title='Download resume data as JSON file'
+          onClick={handleFileDownload}
+        >
+          Download JSON
+        </button>
+
+        <div>
+          <Files
+            className='files-dropzone file-btn'
+            onChange={(files) => handlePhotoUpload(files)}
+            onError={(err) => console.log(err)}
+            accepts={['image/jpeg', 'image/jpg', 'image/png', 'image/svg']}
+            multiple
+            maxFiles={100}
+            maxFileSize={10000000}
+            minFileSize={0}
+            clickable
+          >
+            Upload Photo
+          </Files>
+        </div>
+      </div>
+
       <div className='form'>
         <div className='section contact'>
           <hr />

@@ -4,7 +4,7 @@ import Skills from './sections/Skills';
 import Languages from './sections/Languages';
 import References from './sections/References';
 
-const LeftContent = ({ data }) => {
+const LeftContent = ({ data, Photo }) => {
   const check = (item) => {
     if (item && item.length > 0) {
       return true;

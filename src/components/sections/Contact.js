@@ -1,24 +1,13 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import Default from '../../images/default.jpg';
 
 const Contact = ({ data }) => {
   const { name, photoUrl, location, phone, email, linkedin, github } = data.contact;
 
-  const [Photo, setPhoto] = useState('');
-
-  useEffect(() => {
-    try {
-      const temp = require('../../images/photo.jpg');
-      setPhoto(temp);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
   return (
     <Fragment>
       <div className='photo-container'>
-        <img src={photoUrl.trim().length !== 0 ? photoUrl : Photo ? Photo : Default} alt='' />
+        <img src={photoUrl.trim().length !== 0 ? photoUrl : Default} alt='' />
       </div>
       {name && <div className='name'>{name}</div>}
       <div className='contact'>
