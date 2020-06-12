@@ -1,11 +1,11 @@
+## See this project live:
+
+[https://createmyresume.netlify.app](https://createmyresume.netlify.app)
+
 ## Sample (4 preloaded color schemes):
 
 <img src="https://github.com/ashutoshkumar19/resume-builder/blob/master/samples/dummy-seagreen.jpg" width="350px" /> <img src="https://github.com/ashutoshkumar19/resume-builder/blob/master/samples/dummy-blue.jpg" width="350px" />
 <img src="https://github.com/ashutoshkumar19/resume-builder/blob/master/samples/dummy-grey.jpg" width="350px" /> <img src="https://github.com/ashutoshkumar19/resume-builder/blob/master/samples/dummy-indigo.jpg" width="350px" />
-
-## See this project live:
-
-[https://createmyresume.netlify.app](https://createmyresume.netlify.app)
 
 ## Steps to run this project:
 
@@ -16,10 +16,6 @@ In the project directory,
 
 - Runs the app in the development mode.
 - Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-## To select color-schems:
-
-In `/src/styles/App.scss/` choose your desired color-\*.scss file by uncommenting it, comment-out rest of the color schemes.
 
 ## To add more color schemes:
 

@@ -1,14 +1,16 @@
 import React from 'react';
 
-const Experience = ({ data }) => {
+const Experience = ({ data, color }) => {
   const experience = data.experience;
   return (
     <div className='experience'>
-      <p className='heading'>
-        <span className='material-icons'>business_center</span>
+      <p className='heading' style={{ color: `${color.primary}` }}>
+        <span className='material-icons' style={{ color: `${color.primary}` }}>
+          business_center
+        </span>
         Experience
       </p>
-      <hr />
+      <hr style={{ borderColor: `${color.primary}` }} />
       {experience.map((item, index) => (
         <div key={index} className='row-table'>
           <div className='left-column'>

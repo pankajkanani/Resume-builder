@@ -2,7 +2,38 @@
 
 .form-container {
   width: 100%;
+  min-width: 278px;
   padding: 10px;
+
+  .colorSchemeContainer {
+    display: flex;
+    height: fit-content;
+    margin-bottom: 15px;
+
+    p {
+      font-size: 18px;
+      margin: 0;
+      font-weight: bold;
+      margin-right: 20px;
+    }
+    .colorContainer {
+      display: flex;
+      .colorScheme {
+        height: 20px;
+        width: 20px;
+        border-radius: 25px;
+        margin: auto;
+        margin-left: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+        transition: ease-in-out 200ms;
+
+        &:hover {
+          transform: scale(1.15);
+        }
+      }
+    }
+  }
 
   .file-btn {
     width: fit-content;
@@ -57,7 +88,7 @@
         input {
           margin: 5px 5px 5px 0;
           &:first-child {
-            width: 200px;
+            width: 125px;
           }
           &:last-child {
             max-width: 50px;

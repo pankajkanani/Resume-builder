@@ -1,14 +1,17 @@
 import React from 'react';
 
-const Projects = ({ data }) => {
+const Projects = ({ data, color }) => {
   const projects = data.projects;
   const projects_link = data.projects_link;
   return (
     <div className='projects'>
-      <p className='heading'>
-        <span className='material-icons'>integration_instructions</span>Projects
+      <p className='heading' style={{ color: `${color.primary}` }}>
+        <span className='material-icons' style={{ color: `${color.primary}` }}>
+          integration_instructions
+        </span>
+        Projects
       </p>
-      <hr />
+      <hr style={{ borderColor: `${color.primary}` }} />
       {projects.map((item, index) => (
         <ul key={index} className='row-table'>
           <li>
@@ -16,7 +19,12 @@ const Projects = ({ data }) => {
             {item.link && (
               <span className='link'>
                 <span className='fas fa-link' />
-                <a href={item.link} target='_blank' rel='noopener noreferrer'>
+                <a
+                  href={item.link}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  style={{ color: `${color.primary}` }}
+                >
                   {item.link}
                 </a>
               </span>
@@ -29,7 +37,12 @@ const Projects = ({ data }) => {
         <li className='repo_link'>
           More projects on:
           <span className='fas fa-link' />
-          <a href={projects_link} target='_blank' rel='noopener noreferrer'>
+          <a
+            href={projects_link}
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: `${color.primary}` }}
+          >
             {projects_link}
           </a>
         </li>

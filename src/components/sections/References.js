@@ -1,14 +1,17 @@
 import React from 'react';
 
-const References = ({ data }) => {
+const References = ({ data, color }) => {
   const references = data.references;
 
   return (
     <div className='reference'>
-      <p className='heading'>
-        <span className='material-icons'>contact_mail</span>Reference
+      <p className='heading' style={{ color: `${color.primary}` }}>
+        <span className='material-icons' style={{ color: `${color.primary}` }}>
+          contact_mail
+        </span>
+        Reference
       </p>
-      <hr />
+      <hr style={{ borderColor: `${color.primary}` }} />
       {references.map((item, index) => (
         <div key={index} className='reference-item'>
           {item.name && (

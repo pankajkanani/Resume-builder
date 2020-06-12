@@ -1,14 +1,16 @@
 import React from 'react';
 
-const Education = ({ data }) => {
+const Education = ({ data, color }) => {
   const education = data.education;
   return (
     <div className='education'>
-      <p className='heading'>
-        <span className='material-icons'>school</span>
+      <p className='heading' style={{ color: `${color.primary}` }}>
+        <span className='material-icons' style={{ color: `${color.primary}` }}>
+          school
+        </span>
         Education
       </p>
-      <hr style={{ color: 'red' }} />
+      <hr style={{ borderColor: `${color.primary}` }} />
       {education.map((item, index) => (
         <div key={index} className='row-table'>
           <div className='left-column'>
@@ -24,7 +26,7 @@ const Education = ({ data }) => {
                 : item.cgpa && `CGPA: ${item.cgpa}`}
             </p> */}
             {item.percentage.length > 0 && (
-              <p className='score'>
+              <p className='score' style={{ color: `${color.primary}` }}>
                 {item.percentage <= 10
                   ? `CGPA: ${item.percentage}`
                   : `Percentage: ${item.percentage}`}

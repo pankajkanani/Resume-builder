@@ -1,15 +1,18 @@
 import React from 'react';
 
-const Languages = ({ data }) => {
+const Languages = ({ data, color }) => {
   const languages = data.languages;
   const loop = [1, 2, 3, 4, 5];
 
   return (
     <div className='languages'>
-      <p className='heading'>
-        <span className='material-icons'>language</span>Languages
+      <p className='heading' style={{ color: `${color.primary}` }}>
+        <span className='material-icons' style={{ color: `${color.primary}` }}>
+          language
+        </span>
+        Languages
       </p>
-      <hr />
+      <hr style={{ borderColor: `${color.primary}` }} />
       <div className='languages-container'>
         {languages.map((item, index) => {
           return (
@@ -24,13 +27,21 @@ const Languages = ({ data }) => {
                   // }
                   if (num <= item.level) {
                     return (
-                      <div key={i} className='material-icons star'>
+                      <div
+                        key={i}
+                        className='material-icons star'
+                        style={{ color: `${color.primary}` }}
+                      >
                         star
                       </div>
                     );
                   } else {
                     return (
-                      <div key={i} className='material-icons star'>
+                      <div
+                        key={i}
+                        className='material-icons star'
+                        style={{ color: `${color.primary}` }}
+                      >
                         star_outline
                       </div>
                     );

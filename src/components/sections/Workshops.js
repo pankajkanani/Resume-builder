@@ -1,13 +1,16 @@
 import React from 'react';
 
-const Workshops = ({ data }) => {
+const Workshops = ({ data, color }) => {
   const workshops = data.workshops;
   return (
     <div className='workshops'>
-      <p className='heading'>
-        <span className='material-icons'>developer_board</span>Workshops
+      <p className='heading' style={{ color: `${color.primary}` }}>
+        <span className='material-icons' style={{ color: `${color.primary}` }}>
+          developer_board
+        </span>
+        Workshops
       </p>
-      <hr />
+      <hr style={{ borderColor: `${color.primary}` }} />
       {workshops.map((item, index) => (
         <div key={index} className='row-table'>
           <div className='left-column'>

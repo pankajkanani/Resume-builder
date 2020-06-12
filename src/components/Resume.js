@@ -7,8 +7,8 @@ class Resume extends Component {
   render() {
     return (
       <div className='resume' id='resume'>
-        <LeftContent data={this.props.data} />
-        <RightContent data={this.props.data} />
+        <LeftContent data={this.props.data} color={this.props.color} />
+        <RightContent data={this.props.data} color={this.props.color} />
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Default from '../../images/default.jpg';
 
-const Contact = ({ data }) => {
+const Contact = ({ data, color }) => {
   const { name, photoUrl, location, phone, email, linkedin, github } = data.contact;
 
   return (
@@ -9,19 +9,27 @@ const Contact = ({ data }) => {
       <div className='photo-container'>
         <img src={photoUrl.trim().length !== 0 ? photoUrl : Default} alt='' />
       </div>
-      {name && <div className='name'>{name}</div>}
+      {name && (
+        <div className='name' style={{ color: `${color.primary}` }}>
+          {name}
+        </div>
+      )}
       <div className='contact'>
         {/* <p className='heading'>Personal Info</p> */}
         {/* <hr /> */}
         {location && (
           <div className='item'>
-            <p className='material-icons icon'>location_on</p>
+            <p className='material-icons icon' style={{ color: `${color.primary}` }}>
+              location_on
+            </p>
             <p className='text'>{location}</p>
           </div>
         )}
         {phone && (
           <div className='item'>
-            <p className='material-icons icon'>phone</p>
+            <p className='material-icons icon' style={{ color: `${color.primary}` }}>
+              phone
+            </p>
             <p className='text'>
               <a href={'tel:' + phone}>{phone}</a>
             </p>
@@ -29,7 +37,9 @@ const Contact = ({ data }) => {
         )}
         {email && (
           <div className='item'>
-            <p className='material-icons icon'>email</p>
+            <p className='material-icons icon' style={{ color: `${color.primary}` }}>
+              email
+            </p>
             <p className='text'>
               <a href={'mailto:' + email}>{email}</a>
             </p>
@@ -37,7 +47,7 @@ const Contact = ({ data }) => {
         )}
         {linkedin && (
           <div className='item'>
-            <i className='fab fa-linkedin icon'></i>
+            <i className='fab fa-linkedin icon' style={{ color: `${color.primary}` }}></i>
             <p className='text'>
               <a href={'https://www.' + linkedin} target='_blank' rel='noopener noreferrer'>
                 {linkedin}
@@ -47,7 +57,7 @@ const Contact = ({ data }) => {
         )}
         {github && (
           <div className='item'>
-            <i className='fab fa-github icon'></i>
+            <i className='fab fa-github icon' style={{ color: `${color.primary}` }}></i>
             <p className='text'>
               <a href={'https://www.' + github} target='_blank' rel='noopener noreferrer'>
                 {github}

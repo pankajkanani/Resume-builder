@@ -3,7 +3,7 @@ import Files from 'react-files';
 
 import '../styles/Form.scss';
 
-const Form = ({ data, setData }) => {
+const Form = ({ data, setData, preset, setColor }) => {
   let { name, photoUrl, location, phone, email, linkedin, github } = data.contact;
   let languages = data.languages;
   let references = data.references;
@@ -122,8 +122,29 @@ const Form = ({ data, setData }) => {
     });
   };
 
+  // Handle color scheme change
+  const changeColorScheme = (item) => {
+    setColor({ primary: item.primary, background: item.background, skills: item.skills });
+  };
+
   return (
     <div className='form-container'>
+      <div className='colorSchemeContainer'>
+        <p>Select color scheme: </p>
+        <div className='colorContainer'>
+          {preset.map((item, key) => (
+            // console.log(item)
+
+            <div
+              key={key}
+              className='colorScheme'
+              onClick={() => changeColorScheme(item)}
+              style={{ backgroundColor: `${item.primary}` }}
+            ></div>
+          ))}
+        </div>
+      </div>
+
       <div style={{ display: 'flex' }}>
         <div title='Populate resume data from JSON file'>
           <Files

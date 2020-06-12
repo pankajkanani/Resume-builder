@@ -1,15 +1,17 @@
 import React from 'react';
 
-const Certifications = ({ data }) => {
+const Certifications = ({ data, color }) => {
   const certifications = data.certifications;
   return (
     <div className='certifications'>
-      <p className='heading'>
-        <span className='material-icons'>card_membership</span>
+      <p className='heading' style={{ color: `${color.primary}` }}>
+        <span className='material-icons' style={{ color: `${color.primary}` }}>
+          card_membership
+        </span>
         {/* <span className='material-icons'>card_giftcard</span> */}
         Certifications
       </p>
-      <hr />
+      <hr style={{ borderColor: `${color.primary}` }} />
       {certifications.map((item, index) => (
         <div key={index} className='row-table'>
           <div className='left-column'>
@@ -19,7 +21,11 @@ const Certifications = ({ data }) => {
                 {item.year}
               </p>
             )}
-            {item.score && <p className='score'>Score: {item.score}</p>}
+            {item.score && (
+              <p className='score' style={{ color: `${color.primary}` }}>
+                Score: {item.score}
+              </p>
+            )}
           </div>
           <div className='right-column'>
             <p className='course'>{item.course}</p>
